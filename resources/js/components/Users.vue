@@ -32,9 +32,11 @@
                       <td>{{user.created_at | myDate}}</td>
                       <td><span class="tag tag-success">Approved</span></td>
                       <td>
-                          <a href="#"> <i class="fa fa-edit blue"></i></a>
-                          /
-                          <a href="#"> <i class="fa fa-trash red"></i></a>
+                            <a href="#"> <i class="fa fa-edit blue"></i></a>
+                            /
+                            <a href="#" @click="deleteUser(user.id)">
+                                <i class="fa fa-trash red"></i>
+                            </a>
                       </td>
                     </tr>
                   </tbody>
@@ -120,9 +122,40 @@
             }
         },
         methods: {
+            deleteUser(id) {
+                Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+
+                    //send request to the server
+                    if (result.value) {
+                        this.form.delete('api/user/'+id).then(()=> {
+                            
+                            Swal.fire(
+                            'Deleted!',
+                            'Your file has been deleted.',
+                            'success'
+                            )
+
+                            Fire.$emit('AfterCreate'); 
+                            
+                        }).catch(()=> {
+                            Swal("Failed", "There was something wrong.", "warning");
+                        })
+                    }
+                })
+            },
+
             loadUsers() {
                 axios.get("api/user").then(({data}) => (this.users = data.data));
             },
+            
             createUser() {
                 this.$Progress.start();
                 this.form.post('api/user')
