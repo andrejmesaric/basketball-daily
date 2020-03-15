@@ -61,16 +61,15 @@
                             
                             <div class="form-group">
                                 <input v-model="form.name" type="text" name="name"
-                                placeholder="Name"
+                                    placeholder="Name"
                                     class="form-control" :class="{ 'is-invalid': form.errors.has('name') }">
-                                    <has-error :form="form" field="name"></has-error>
+                                <has-error :form="form" field="name"></has-error>
                             </div>
 
                             <div class="form-group">
                                 <input v-model="form.email" type="email" name="email"
-                                placeholder="Email"
-                                    class="form-control" :class="{ 'is-invalid': form.errors.has('email') }">
-                                    <has-error :form="form" field="email"></has-error>
+                                placeholder="Email" class="form-control" :class="{ 'is-invalid': form.errors.has('email') }">
+                                <has-error :form="form" field="email"></has-error>
                             </div>
 
                             <div class="form-group">
@@ -95,7 +94,7 @@
                     
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary btn-danger" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Create User</button>
+                            <button type="submit" class="btn btn-primary">Create User</button>
                         </div>
                     </form>
                 </div>
@@ -119,7 +118,7 @@
         },
         methods: {
             createUser() {
-                this.Form.post('api/user');
+                this.form.post('api/user');
             }
         },
         mounted() {
