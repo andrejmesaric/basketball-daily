@@ -29,7 +29,7 @@
                       <td>{{user.name}}</td>
                       <td>{{user.email}}</td>
                       <td>{{user.type | upText}}</td>
-                      <td>{{user.created_at}}</td>
+                      <td>{{user.created_at | myDate}}</td>
                       <td><span class="tag tag-success">Approved</span></td>
                       <td>
                           <a href="#"> <i class="fa fa-edit blue"></i></a>
