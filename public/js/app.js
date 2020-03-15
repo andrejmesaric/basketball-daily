@@ -38713,7 +38713,7 @@ var render = function() {
                     _vm._v(" "),
                     _c("td", [_vm._v(_vm._s(user.email))]),
                     _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(user.type))]),
+                    _c("td", [_vm._v(_vm._s(_vm._f("upText")(user.type)))]),
                     _vm._v(" "),
                     _c("td", [_vm._v(_vm._s(user.created_at))]),
                     _vm._v(" "),
@@ -54205,6 +54205,9 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
   mode: 'history',
   routes: routes // short for `routes: routes`
 
+});
+Vue.filter('upText', function (text) {
+  return text.charAt(0).toUpperCase() + text.slice(1);
 });
 /**
  * The following block of code may be used to automatically register your
