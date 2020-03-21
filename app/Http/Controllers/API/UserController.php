@@ -64,6 +64,12 @@ class UserController extends Controller
         //
     }
 
+    
+    public function profile()
+    {
+        return auth('api')->user();
+    }
+
     /**
      * Update the specified resource in storage.
      *

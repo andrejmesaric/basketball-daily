@@ -120,6 +120,8 @@
                     name: '',
                     email: '',
                     password: '',
+                    description:'',
+                    photo: '',
                     remember: false
                 })
             }
