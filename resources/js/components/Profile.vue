@@ -14,8 +14,8 @@
                 <div class="card card-widget widget-user">
                     <!-- Add the bg color to the header using any of the bg-* classes -->
                     <div class="widget-user-header text-white" style="background-image: url('./img/basketball-court.jpg');">
-                        <h3 class="widget-user-username text-right">Elizabeth Pierce</h3>
-                        <h5 class="widget-user-desc text-right">Web Designer</h5>
+                        <h3 class="widget-user-username text-right">{{ form.name }}</h3>
+                        <h5 class="widget-user-desc text-right">{{ form.description }}</h5>
                     </div>
                     <div class="widget-user-image">
                         <img class="img-circle" src="" alt="User Avatar">
@@ -68,35 +68,35 @@
 
                     <div class="active tab-pane" id="settings">
                         <form class="form-horizontal">
-                        <div class="form-group row">
-                            <label for="inputName" class="col-sm-2 col-form-label">Name</label>
-                            <div class="col-sm-12">
-                                <input type="text" v-model="form.name" class="form-control" id="inputName" placeholder="Name" value="">
+                            <div class="form-group row">
+                                <label for="inputName" class="col-sm-2 col-form-label">Name</label>
+                                <div class="col-sm-12">
+                                    <input type="text" v-model="form.name" class="form-control" id="inputName" placeholder="Name" value="">
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
-                            <div class="col-sm-12">
-                                <input type="email" v-model="form.email" class="form-control" id="inputEmail" placeholder="Email">
+                            <div class="form-group row">
+                                <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
+                                <div class="col-sm-12">
+                                    <input type="email" v-model="form.email" class="form-control" id="inputEmail" placeholder="Email">
+                                </div>
+                            </div>                        
+                            <div class="form-group row">
+                                <label for="inputDescription" class="col-sm-2 col-form-label">Description</label>
+                                <div class="col-sm-12">
+                                <textarea class="form-control" v-model="form.description" id="inputDescription" placeholder="Description"></textarea>
+                                </div>
                             </div>
-                        </div>                        
-                        <div class="form-group row">
-                            <label for="inputDescription" class="col-sm-2 col-form-label">Description</label>
-                            <div class="col-sm-12">
-                            <textarea class="form-control" v-model="form.description" id="inputDescription" placeholder="Description"></textarea>
+                            <div class="form-group row">
+                                <label for="photo" class="col-sm-12 control-label">Profile Photo</label>
+                                <div class="col-sm-12">
+                                    <input type="file" @change="updateProfile($event)" name="photo" class="form-input">
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="photo" class="col-sm-2 control-label">Profile Photo</label>
-                            <div class="col-sm-12">
-                                <input type="file" name="photo" class="form-input">
+                            <div class="form-group row">
+                                <div class="offset-sm-2 col-sm-10">
+                                <button type="submit" class="btn btn-success">Update</button>
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="offset-sm-2 col-sm-10">
-                            <button type="submit" class="btn btn-success">Update</button>
-                            </div>
-                        </div>
                         </form>
                     </div>
                     <!-- /.tab-pane -->
@@ -127,6 +127,19 @@
         },
         mounted() {
             console.log('Component mounted.')
+        },
+
+        methods: {
+            updateProfile(e) {
+                //console.log(e.target.files);
+                let file = e.target.files[0];
+                let reader = new FileReader();
+                reader.onloadend = (file) => {
+                    //this.form.photo = "test";
+                    this.form.photo = reader.result;
+                }
+                reader.readAsDataURL(file);
+            }
         },
 
         created() {
