@@ -70,6 +70,21 @@ class UserController extends Controller
         return auth('api')->user();
     }
 
+    public function updateProfile(Request $request)
+    {
+        $user = auth('api')->user();
+        
+        $this->validate($request, [
+            'name' => 'required|string|max:191',
+            'email' => 'required|string|email|max:191|unique:users,email,'.$user->id,
+            'type' => 'required|string',
+            'password' => 'sometimes|min:8'
+
+        ]);
+
+        return ['message' => 'Success'];
+    }
+
     /**
      * Update the specified resource in storage.
      *
@@ -86,7 +101,6 @@ class UserController extends Controller
             'email' => 'required|string|email|max:191|unique:users,email,'.$user->id,
             'type' => 'required|string',
             'password' => 'sometimes|min:8'
-
         ]);
 
         $user->update($request->all());

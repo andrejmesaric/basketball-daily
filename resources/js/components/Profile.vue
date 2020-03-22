@@ -87,14 +87,26 @@
                                 </div>
                             </div>
                             <div class="form-group row">
+                                <label for="inputDescription" class="col-sm-2 col-form-label">User type</label>
+                                <div class="col-sm-12">
+                                <select v-model="form.type" name="type" id="type" class="form-control"  
+                                :class="{ 'is-invalid': form.errors.has('type') }">
+                                    <option>Select User Role</option>
+                                    <option value="admin">Admin</option>
+                                    <option value="user">Standard User</option>
+                                    <option value="author">Authors</option>
+                                </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
                                 <label for="photo" class="col-sm-12 control-label">Profile Photo</label>
                                 <div class="col-sm-12">
                                     <input type="file" @change="updateProfile($event)" name="photo" class="form-input">
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <div class="offset-sm-2 col-sm-10">
-                                <button type="submit" class="btn btn-success">Update</button>
+                                <div class="col-sm-12 mt-3">
+                                <button type="submit" @click.prevent="updateInfo" class="btn btn-success">Update</button>
                                 </div>
                             </div>
                         </form>
@@ -130,6 +142,15 @@
         },
 
         methods: {
+            updateInfo() {
+                this.form.put('api/user/'+this.form.id)
+                .then(() => {
+
+                })
+                .catch(() => {
+
+                });
+            },
             updateProfile(e) {
                 //console.log(e.target.files);
                 let file = e.target.files[0];
