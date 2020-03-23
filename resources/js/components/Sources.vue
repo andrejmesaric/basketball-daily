@@ -7,7 +7,7 @@
                 <h3 class="card-title">Sources</h3>
 
                 <div class="card-tools">
-                  <button class="btn btn-success" @click="newModal">Add Source <i class="fa fa-user-plus fa-fw"></i></button>
+                  <button class="btn btn-success">Add Source <i class="fa fa-user-plus fa-fw"></i></button>
                 </div>
               </div>
               <!-- /.card-header -->
@@ -27,7 +27,7 @@
                     <tr v-for="source in sources" :key="source.id">
                       <td>{{source.id}}</td>
                       <td>{{source.name}}</td>
-                      <td>{{source.language}}</td>
+                      <td>{{source.description}}</td>
                       <td>{{source.language | upText}}</td>
                       <td>{{source.created_at | myDate}}</td>
                       <td>
@@ -47,65 +47,6 @@
           </div>
         </div>
         <!-- /.row -->
-
-        <!-- Modal -->
-        <!--div class="modal fade" id="addSource" tabindex="-1" role="dialog" aria-labelledby="addSourceLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 v-show="editmode" class="modal-title" id="addSourceLabel">Update Source</h5>
-                        <h5 v-show="!editmode" class="modal-title" id="addSourceLabel">Add Source</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-
-                    <form @submit.prevent="editmode ? updateSource() : createSource()">
-                        <div class="modal-body">
-                            
-                            <div class="form-group">
-                                <input v-model="form.name" type="text" name="name"
-                                    placeholder="Name"
-                                    class="form-control" :class="{ 'is-invalid': form.errors.has('name') }">
-                                <has-error :form="form" field="name"></has-error>
-                            </div>
-
-                            <!--div class="form-group">
-                                <input v-model="form.email" type="email" name="email"
-                                placeholder="Email" class="form-control" :class="{ 'is-invalid': form.errors.has('email') }">
-                                <has-error :form="form" field="email"></has-error>
-                            </div-->
-
-                            <!--div class="form-group">
-                                <select v-model="form.type" name="type" id="type" class="form-control"  
-                                :class="{ 'is-invalid': form.errors.has('type') }">
-                                    <option>Select User Role</option>
-                                    <option value="admin">Admin</option>
-                                    <option value="user">Standard User</option>
-                                    <option value="author">Authors</option>
-                                </select>
-                                <has-error :form="form" field="type"></has-error>
-                            </div-->
-
-                            <!--div class="form-group">
-                                <input v-model="form.password" type="password" name="password" id="password"
-                                placeholder="Password" class="form-control" 
-                                :class="{ 'is-invalid': form.errors.has('password') }">
-                                    <has-error :form="form" field="password"></has-error>
-                            </div-->
-
-                        <!--/div>
-                    
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary btn-danger" data-dismiss="modal">Close</button>
-                            <button v-show="editmode" type="submit" class="btn btn-success">Update Source</button>
-                            <button v-show="!editmode" type="submit" class="btn btn-primary">Create Source</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div-->
-
     </div>
 </template>
 
@@ -113,8 +54,7 @@
     export default {
         data() {            
             return {
-                editmode: false,
-                sources : {},
+                sources: {},
                 form: new Form({
                     id: '',
                     name: '',
@@ -127,7 +67,11 @@
         },
         methods: {            
             loadSources() {
-                axios.get("source").then(({data}) => (this.sources = data.data));
+                axios.get("/sources").then(({data}) => (this.sources = data.data));
+                /*axios.get("/sources")
+                .then(({data}) => {
+                    console.log(data);
+                });*/
             }
         },
         created() {            

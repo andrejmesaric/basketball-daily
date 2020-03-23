@@ -2253,69 +2253,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      editmode: false,
       sources: {},
       form: new Form({
         id: '',
@@ -2331,10 +2271,14 @@ __webpack_require__.r(__webpack_exports__);
     loadSources: function loadSources() {
       var _this = this;
 
-      axios.get("source").then(function (_ref) {
+      axios.get("/sources").then(function (_ref) {
         var data = _ref.data;
         return _this.sources = data.data;
       });
+      /*axios.get("/sources")
+      .then(({data}) => {
+          console.log(data);
+      });*/
     }
   },
   created: function created() {
@@ -61730,24 +61674,11 @@ var render = function() {
     _c("div", { staticClass: "row" }, [
       _c("div", { staticClass: "col-12 mt-5" }, [
         _c("div", { staticClass: "card" }, [
-          _c("div", { staticClass: "card-header" }, [
-            _c("h3", { staticClass: "card-title" }, [_vm._v("Sources")]),
-            _vm._v(" "),
-            _c("div", { staticClass: "card-tools" }, [
-              _c(
-                "button",
-                { staticClass: "btn btn-success", on: { click: _vm.newModal } },
-                [
-                  _vm._v("Add Source "),
-                  _c("i", { staticClass: "fa fa-user-plus fa-fw" })
-                ]
-              )
-            ])
-          ]),
+          _vm._m(0),
           _vm._v(" "),
           _c("div", { staticClass: "card-body table-responsive p-0" }, [
             _c("table", { staticClass: "table table-hover" }, [
-              _vm._m(0),
+              _vm._m(1),
               _vm._v(" "),
               _c(
                 "tbody",
@@ -61757,7 +61688,7 @@ var render = function() {
                     _vm._v(" "),
                     _c("td", [_vm._v(_vm._s(source.name))]),
                     _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(source.language))]),
+                    _c("td", [_vm._v(_vm._s(source.description))]),
                     _vm._v(" "),
                     _c("td", [
                       _vm._v(_vm._s(_vm._f("upText")(source.language)))
@@ -61767,7 +61698,7 @@ var render = function() {
                       _vm._v(_vm._s(_vm._f("myDate")(source.created_at)))
                     ]),
                     _vm._v(" "),
-                    _vm._m(1, true)
+                    _vm._m(2, true)
                   ])
                 }),
                 0
@@ -61780,6 +61711,21 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-header" }, [
+      _c("h3", { staticClass: "card-title" }, [_vm._v("Sources")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "card-tools" }, [
+        _c("button", { staticClass: "btn btn-success" }, [
+          _vm._v("Add Source "),
+          _c("i", { staticClass: "fa fa-user-plus fa-fw" })
+        ])
+      ])
+    ])
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
