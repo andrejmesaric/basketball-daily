@@ -10,15 +10,25 @@ use App\Source;
 class SourceController extends Controller
 {
     /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('api');
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        //return ['message' => 'Success'];
-        return Sources::all();
+        return Source::latest()->paginate(10);
     }
+    
 
     /**
      * Store a newly created resource in storage.

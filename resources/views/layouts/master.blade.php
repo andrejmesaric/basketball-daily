@@ -102,7 +102,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </li>
               <li class="nav-item">
                 <router-link to="/sources" class="nav-link">
-                  <i class="fas fa-users nav-icon"></i>
+                  <i class="fas fa-bong nav-icon blue"></i>
                   <p>Sources</p>
                 </router-link>
               </li>

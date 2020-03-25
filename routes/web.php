@@ -23,5 +23,5 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('{path}', 'HomeController@index')->where('path', '([A-z\d\-/_.]+)?' );
 
-Route::get('/sources', 'SourceController@index');
+Route::get('/sources', 'SourceController@index')->name("sources.index");
 //Route::post('/sources', 'SourceController@store');

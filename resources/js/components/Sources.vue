@@ -7,7 +7,7 @@
                 <h3 class="card-title">Sources</h3>
 
                 <div class="card-tools">
-                  <button class="btn btn-success">Add Source <i class="fa fa-user-plus fa-fw"></i></button>
+                  <button class="btn btn-success">Add Source <i class="fas fa-bong fa-fw"></i></button>
                 </div>
               </div>
               <!-- /.card-header -->
@@ -67,7 +67,13 @@
         },
         methods: {            
             loadSources() {
-                axios.get("/sources").then(({data}) => (this.sources = data.data));
+                alert("GET SOURCES");
+                axios.get("sources")
+                .then(({response}) => {
+                  //this.sources = response.data
+                  console.log(response.data);  
+                })
+                .catch( error => { console.log(error) });
                 /*axios.get("/sources")
                 .then(({data}) => {
                     console.log(data);
@@ -76,11 +82,11 @@
         },
         created() {            
             this.loadSources();
-            Fire.$on('AfterCreate', () => {
+            /*Fire.$on('AfterCreate', () => {
                 this.loadSources();
-            });
+            });*/
 
-            //setInterval(() => this.loadUsers(), 3000);
+            //setInterval(() => this.loadSources(), 3000);
         }
     }
 </script>
